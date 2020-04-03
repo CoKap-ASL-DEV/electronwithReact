@@ -1,8 +1,13 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+var Mousetrap = require("mousetrap");
 
 function App() {
+  Mousetrap.bind("4", () => {
+    console.log("command shift k");
+    //mainWindow.webContents.toggleDevTools();
+  });
   return (
     <div className="App">
       <header className="App-header">

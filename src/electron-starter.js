@@ -10,9 +10,9 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
     // webPreferences: {
-    //   preload: path.join(__dirname, "preload.js")
+    preload: path.join(__dirname, "preload.js")
     // }
   });
 
@@ -90,9 +90,38 @@ var template = [
         }
       }
     ]
+  },
+  {
+    label: "View",
+    submenu: [
+      {
+        label: "Reload",
+        accelerator: "F5",
+        click: (item, focusedWindow) => {
+          if (focusedWindow) {
+            // on reload, start fresh and close any old
+            // open secondary windows
+            if (focusedWindow.id === 1) {
+              BrowserWindow.getAllWindows().forEach(win => {
+                if (win.id > 1) win.close();
+              });
+            }
+            focusedWindow.reload();
+          }
+        }
+      },
+      {
+        label: "Toggle Dev Tools",
+        accelerator: "F12",
+        click: () => {
+          mainWindow.webContents.toggleDevTools();
+        }
+      }
+    ]
   }
 ];
 const menu = Menu.buildFromTemplate(template);
+
 Menu.setApplicationMenu(menu);
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
