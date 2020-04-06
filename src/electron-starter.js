@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu, dialog, ipcMain } = require("electron");
+const { app, BrowserWindow, Menu, dialog, ipcMain, shell } = require("electron");
 
 const fs = require("fs");
 const path = require("path");
@@ -33,8 +33,7 @@ function createWindow() {
   //mainWindow.webContents.openDevTools();
 }
 
-var showOpen = () => {
-  console.log("aaaa");
+var showOpen = () => {  
   dialog
     .showOpenDialog(
       mainWindow,
@@ -81,7 +80,8 @@ var showOpen = () => {
       // }
     )
     .then((filenames) => {
-      console.log(filenames);
+      console.log(filenames.filePaths[0]);
+      shell.showItemInFolder(filenames.filePaths[0])
     });
 
   // if (!files) return;
@@ -159,6 +159,7 @@ app.on("activate", function () {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  
 });
 
 // In this file you can include the rest of your app's specific main process
