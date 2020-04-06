@@ -1,18 +1,18 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, dialog, Menu, ipcMain } = require("electron");
+const { app, BrowserWindow, Menu, dialog, ipcMain } = require("electron");
+
 const fs = require("fs");
 const path = require("path");
 const url = require("url");
 
 let mainWindow;
-
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     // webPreferences: {
-    preload: path.join(__dirname, "preload.js")
+    preload: path.join(__dirname, "preload.js"),
     // }
   });
 
@@ -24,7 +24,7 @@ function createWindow() {
     url.format({
       pathname: path.join(__dirname, "/../build/index.html"),
       protocol: "file:",
-      slashes: true
+      slashes: true,
     });
 
   mainWindow.loadURL(startUrl); // 개발모드 & 빌드모드 자동선택
@@ -33,63 +33,83 @@ function createWindow() {
   //mainWindow.webContents.openDevTools();
 }
 
-var showOpen = function() {
-  const files = dialog.showOpenDialog({
-    properties: ["openFile"],
-    filters: [
+var showOpen = () => {
+  console.log("aaaa");
+  dialog
+    .showOpenDialog(
+      mainWindow,
       {
-        name: "모든 이미지 파일",
-        extensions: ["bmp", "jpg", "jpeg", "jpe", "gif", "tif", "tiff", "png"]
-      },
-      {
-        name: "BITMAP 파일",
-        extensions: ["bmp"]
-      },
-      {
-        name: "JPEG 파일",
-        extensions: ["jpg", "jpeg", "jpe"]
-      },
-      {
-        name: "GIF 파일",
-        extensions: ["gif"]
-      },
-      {
-        name: "TIF 파일",
-        extensions: ["tif", "tiff"]
-      },
-      {
-        name: "PNG 파일",
-        extensions: ["png"]
+        properties: ["openFile"],
+        filters: [
+          {
+            name: "모든 이미지 파일",
+            extensions: [
+              "bmp",
+              "jpg",
+              "jpeg",
+              "jpe",
+              "gif",
+              "tif",
+              "tiff",
+              "png",
+            ],
+          },
+          {
+            name: "BITMAP 파일",
+            extensions: ["bmp"],
+          },
+          {
+            name: "JPEG 파일",
+            extensions: ["jpg", "jpeg", "jpe"],
+          },
+          {
+            name: "GIF 파일",
+            extensions: ["gif"],
+          },
+          {
+            name: "TIF 파일",
+            extensions: ["tif", "tiff"],
+          },
+          {
+            name: "PNG 파일",
+            extensions: ["png"],
+          },
+        ],
       }
-    ]
-  });
-  console.log(files);
-  //if (!files) return;
-  //const file = files[0];
+      // (filenames) => {
+      //   console.log("ddddd");
+      // }
+    )
+    .then((filenames) => {
+      console.log(filenames);
+    });
+
+  // if (!files) return;
+  // const file = files[0];
   //const fileContent = fs.readFileSync(file).toString();
-  //console.log(fileContent);
+  // console.log(file);
 };
 
-ipcMain.on("toggle-debug", (event, arg) => {
-  //디버기 툴 토글(on/off)
-  mainWindow.webContents.toggleDevTools();
-});
-ipcMain.on("refresh", (event, arg) => {
-  //페이지 갱신
-  mainWindow.reload();
-});
+// ipcMain.on("toggle-debug", (event, arg) => {
+//   //디버기 툴 토글(on/off)
+//   mainWindow.webContents.toggleDevTools();
+// });
+// ipcMain.on("refresh", (event, arg) => {
+//   //페이지 갱신
+//   mainWindow.reload();
+// });
 
 var template = [
   {
     label: "File",
     submenu: [
       {
-        label: "Open",
-        click: function() {
+        label: "OpenFile",
+        click: async () => {
           showOpen();
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
     label: "View",
@@ -102,23 +122,23 @@ var template = [
             // on reload, start fresh and close any old
             // open secondary windows
             if (focusedWindow.id === 1) {
-              BrowserWindow.getAllWindows().forEach(win => {
+              BrowserWindow.getAllWindows().forEach((win) => {
                 if (win.id > 1) win.close();
               });
             }
             focusedWindow.reload();
           }
-        }
+        },
       },
       {
         label: "Toggle Dev Tools",
         accelerator: "F12",
         click: () => {
           mainWindow.webContents.toggleDevTools();
-        }
-      }
-    ]
-  }
+        },
+      },
+    ],
+  },
 ];
 const menu = Menu.buildFromTemplate(template);
 
@@ -129,13 +149,13 @@ Menu.setApplicationMenu(menu);
 app.whenReady().then(createWindow);
 
 // Quit when all windows are closed.
-app.on("window-all-closed", function() {
+app.on("window-all-closed", function () {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== "darwin") app.quit();
 });
 
-app.on("activate", function() {
+app.on("activate", function () {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
