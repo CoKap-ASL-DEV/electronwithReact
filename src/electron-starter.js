@@ -1,5 +1,12 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu, dialog, ipcMain, shell } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  Menu,
+  dialog,
+  ipcMain,
+  shell,
+} = require("electron");
 
 const fs = require("fs");
 const path = require("path");
@@ -11,8 +18,12 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    // webPreferences: {
-    preload: path.join(__dirname, "preload.js"),
+    webPreferences: {
+      webSecurity: false,
+      nodeIntegration: true,
+      preload: path.join(__dirname, "preload.js"),
+    },
+
     // }
   });
 
@@ -33,7 +44,7 @@ function createWindow() {
   //mainWindow.webContents.openDevTools();
 }
 
-var showOpen = () => {  
+var showOpen = () => {
   dialog
     .showOpenDialog(
       mainWindow,
@@ -81,7 +92,7 @@ var showOpen = () => {
     )
     .then((filenames) => {
       console.log(filenames.filePaths[0]);
-      shell.showItemInFolder(filenames.filePaths[0])
+      shell.showItemInFolder(filenames.filePaths[0]);
     });
 
   // if (!files) return;
@@ -159,8 +170,10 @@ app.on("activate", function () {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  
 });
 
+ipcMain.on("Hmessage", (event, arg) => {
+  event.sender.send("HmessagePrint", "Hello Welcome");
+});
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
