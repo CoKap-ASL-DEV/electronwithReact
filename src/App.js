@@ -3,7 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import { render } from "@testing-library/react";
 
-//const { ipcRenderer } = window.require("electron");
+const { ipcRenderer } = window.require("electron");
+
 //var HMevent = require("./renderer");
 
 var Mousetrap = require("mousetrap");
@@ -17,7 +18,7 @@ class App extends Component {
       //mainWindow.webContents.toggleDevTools();
     });
 
-    window.ipcRenderer.on("HmessagePrint", (event, arg) => {
+    ipcRenderer.on("HmessagePrint", (event, arg) => {
       console.log("kkkk");
       //alert(arg);
       this.setState({ Message: arg });
@@ -30,7 +31,7 @@ class App extends Component {
           <h1 id="hello">{this.state.Message}</h1>
           <button
             onClick={() => {
-              window.ipcRenderer.send("Hmessage", "start");
+              ipcRenderer.send("Hmessage", "start");
             }}
           >
             {" "}

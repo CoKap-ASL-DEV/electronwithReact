@@ -1,5 +1,5 @@
 //const { ipcRenderer } = require("electron");
-window.ipcRenderer = require("electron").ipcRenderer;
+//window.ipcRenderer = require("electron").ipcRenderer;
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 
