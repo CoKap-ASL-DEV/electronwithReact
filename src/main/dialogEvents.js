@@ -5,7 +5,7 @@ const showOpenFile = (mainWindow) => {
     .showOpenDialog(
       mainWindow,
       {
-        properties: ["openFile"],
+        properties: ["openFile", "multiSelections"],
         filters: [
           {
             name: "모든 이미지 파일",
@@ -48,6 +48,7 @@ const showOpenFile = (mainWindow) => {
     )
     .then((filenames) => {
       console.log(filenames.filePaths[0]);
+      console.log(filenames.filePaths[1]);
       //shell.showItemInFolder(filenames.filePaths[0]);
 
       mainWindow.webContents.send("HmessagePrint", filenames.filePaths[0]);
