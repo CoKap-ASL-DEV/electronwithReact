@@ -8,6 +8,8 @@ const {
   shell,
 } = require("electron");
 
+const { showOpenFile, showOpenDirectory } = require("./main/dialog");
+
 const fs = require("fs");
 const path = require("path");
 const url = require("url");
@@ -44,65 +46,6 @@ function createWindow() {
   //mainWindow.webContents.openDevTools();
 }
 
-var showOpen = () => {
-  dialog
-    .showOpenDialog(
-      mainWindow,
-      {
-        properties: ["openFile"],
-        filters: [
-          {
-            name: "모든 이미지 파일",
-            extensions: [
-              "bmp",
-              "jpg",
-              "jpeg",
-              "jpe",
-              "gif",
-              "tif",
-              "tiff",
-              "png",
-            ],
-          },
-          {
-            name: "BITMAP 파일",
-            extensions: ["bmp"],
-          },
-          {
-            name: "JPEG 파일",
-            extensions: ["jpg", "jpeg", "jpe"],
-          },
-          {
-            name: "GIF 파일",
-            extensions: ["gif"],
-          },
-          {
-            name: "TIF 파일",
-            extensions: ["tif", "tiff"],
-          },
-          {
-            name: "PNG 파일",
-            extensions: ["png"],
-          },
-        ],
-      }
-      // (filenames) => {
-      //   console.log("ddddd");
-      // }
-    )
-    .then((filenames) => {
-      console.log(filenames.filePaths[0]);
-      //shell.showItemInFolder(filenames.filePaths[0]);
-
-      mainWindow.webContents.send("HmessagePrint", filenames.filePaths[0]);
-    });
-
-  // if (!files) return;
-  // const file = files[0];
-  //const fileContent = fs.readFileSync(file).toString();
-  // console.log(file);
-};
-
 // ipcMain.on("toggle-debug", (event, arg) => {
 //   //디버기 툴 토글(on/off)
 //   mainWindow.webContents.toggleDevTools();
@@ -119,7 +62,13 @@ var template = [
       {
         label: "OpenFile",
         click: async () => {
-          showOpen();
+          showOpenFile(mainWindow);
+        },
+      },
+      {
+        label: "openDirectory",
+        click: async () => {
+          showOpenDirectory();
         },
       },
     ],
