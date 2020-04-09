@@ -1,8 +1,8 @@
 const { ipcRenderer } = require("electron");
 
 ipcRenderer.on("HmessagePrint", (event, arg) => {
-  console.log("kkkk");
-  alert("kkk");
+  console.log("zzzzz");
+  alert("zzz");
   let helloEl = document.querySelector("#hello");
   helloEl.innerHTML(arg);
 });

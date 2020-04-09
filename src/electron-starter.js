@@ -9,6 +9,7 @@ const {
 } = require("electron");
 
 const getTemplate = require("./main/menuTemplate");
+let directoryTreeData = require("./main/getTreeData");
 //const { showOpenFile, showOpenDirectory } = require("./main/dialogEvents.js");
 
 const fs = require("fs");
@@ -44,6 +45,8 @@ function createWindow() {
     });
 
   mainWindow.loadURL(startUrl); // 개발모드 & 빌드모드 자동선택
+
+  //mainWindow.webContents.send("GetTreeData", directoryTreeData());
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
@@ -113,6 +116,9 @@ function createWindow() {
 //app.whenReady().then(createWindow);
 app.on("ready", (_) => {
   createWindow();
+  mainWindow.webContents.on("did-finish-load", () => {
+    mainWindow.webContents.send("GetTreeData", directoryTreeData);
+  });
 });
 // Quit when all windows are closed.
 app.on("window-all-closed", function () {

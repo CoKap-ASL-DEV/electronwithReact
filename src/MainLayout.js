@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import "./MainLayout.css";
+import TreeView from "./renderer/TreeView";
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
   DesktopOutlined,
@@ -14,6 +15,8 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const { ipcRenderer } = window.require("electron");
+
+//mainWindow.webContents.send("GetTreeData", directoryTreeData);
 class MainLayout extends React.Component {
   state = {
     collapsed: false,
@@ -23,6 +26,7 @@ class MainLayout extends React.Component {
     console.log(collapsed);
     this.setState({ collapsed });
   };
+  componentDidMount() {}
 
   render() {
     return (
@@ -91,6 +95,8 @@ class MainLayout extends React.Component {
               >
                 Click
               </button>
+
+              <TreeView dtree={this.props.dtree} />
             </div>
           </Content>
           <Layout style={{ background: "lightgray", minHeight: 5 }}>
