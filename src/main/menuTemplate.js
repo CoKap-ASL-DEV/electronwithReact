@@ -14,7 +14,8 @@ function getTemplate(mainWindow) {
           },
         },
         {
-          label: "openDirectory",
+          label: "OpenDirectory",
+          accelerator: "CommandOrControl+O",
           click: async () => {
             showOpenDirectory(mainWindow);
           },
