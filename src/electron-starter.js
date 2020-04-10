@@ -23,6 +23,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1920,
     height: 1080,
+    preloadWindow: true,
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,
@@ -33,6 +34,7 @@ function createWindow() {
   });
   const menu = Menu.buildFromTemplate(getTemplate(mainWindow));
   Menu.setApplicationMenu(menu);
+
   // and load the index.html of the app.
   //mainWindow.loadFile("index.html");
   //mainWindow.loadURL("http://localhost:3000");  // 개발모드시
@@ -116,9 +118,9 @@ function createWindow() {
 //app.whenReady().then(createWindow);
 app.on("ready", (_) => {
   createWindow();
-  mainWindow.webContents.on("did-finish-load", () => {
-    mainWindow.webContents.send("GetTreeData", directoryTreeData);
-  });
+  // mainWindow.webContents.on("did-finish-load", () => {
+  //   mainWindow.webContents.send("GetTreeData", directoryTreeData);
+  // });
 });
 // Quit when all windows are closed.
 app.on("window-all-closed", function () {

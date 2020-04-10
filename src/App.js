@@ -29,10 +29,12 @@ class App extends Component {
 
     ipcRenderer.on("GetTreeData", (event, arg) => {
       console.log(arg);
+      debugger;
       this.setState({ dTreeData: [arg] });
 
       //dTreeData = arg;
     });
+    console.log(this.state.dTreeData);
     return (
       <div>
         <MainLayout message={this.state.message} dtree={this.state.dTreeData} />

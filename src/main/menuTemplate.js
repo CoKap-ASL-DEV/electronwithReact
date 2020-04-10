@@ -3,7 +3,6 @@ const { BrowserWindow } = require("electron");
 const { showOpenFile, showOpenDirectory } = require("./dialogEvents.js");
 
 function getTemplate(mainWindow) {
-  console.log(mainWindow);
   const template = [
     {
       label: "File",
@@ -17,7 +16,7 @@ function getTemplate(mainWindow) {
         {
           label: "openDirectory",
           click: async () => {
-            showOpenDirectory();
+            showOpenDirectory(mainWindow);
           },
         },
       ],

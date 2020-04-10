@@ -1,4 +1,5 @@
-const { dialog } = require("electron");
+const { dialog, app } = require("electron");
+let directoryTreeData = require("./getTreeData");
 
 const showOpenFile = (mainWindow) => {
   dialog
@@ -67,6 +68,15 @@ const showOpenDirectory = (mainWindow) => {
     .then((result) => {
       console.log(result.canceled);
       console.log(result.filePaths);
+
+      if (app.isReady()) {
+        mainWindow.webContents.send(
+          "GetTreeData",
+          directoryTreeData(result.filePaths[0])
+        );
+      }
+
+      console.log("sended");
     })
     .catch((err) => {
       console.log(err);

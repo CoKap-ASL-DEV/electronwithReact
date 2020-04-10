@@ -57,15 +57,22 @@ class TreeView extends Component {
   }
 
   render() {
-    //console.log(dTreeData);
+    console.log(this.props.dtree);
     return (
-      <DirectoryTree
-        multiple
-        defaultExpandAll
-        onSelect={this.onSelect}
-        onExpand={this.onExpand}
-        treeData={this.props.dtree}
-      />
+      <div>
+        {console.log(!!this.props.dtree)}
+        {!!this.props.dtree ? (
+          <DirectoryTree
+            multiple
+            defaultExpandAll
+            onSelect={this.onSelect}
+            onExpand={this.onExpand}
+            treeData={this.props.dtree}
+          />
+        ) : (
+          <h1>Test</h1>
+        )}
+      </div>
     );
   }
 }

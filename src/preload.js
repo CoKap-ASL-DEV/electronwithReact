@@ -2,6 +2,8 @@
 //window.ipcRenderer = require("electron").ipcRenderer;
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
+// Modules to control application life and create native browser window
+window.ipcRenderer = require("electron").ipcRenderer;
 
 // window.addEventListener("DOMContentLoaded", () => {
 //   const replaceText = (selector, text) => {
