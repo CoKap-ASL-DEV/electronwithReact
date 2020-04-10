@@ -29,7 +29,7 @@ class App extends Component {
 
     ipcRenderer.on("GetTreeData", (event, arg) => {
       console.log(arg);
-      debugger;
+      //debugger;
       this.setState({ dTreeData: [arg] });
 
       //dTreeData = arg;

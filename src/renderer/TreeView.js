@@ -63,6 +63,13 @@ class TreeView extends Component {
         {console.log(!!this.props.dtree)}
         {!!this.props.dtree ? (
           <DirectoryTree
+            style={{
+              background: "#001529",
+              color: "#ffffff",
+              hover: {
+                background: "#111111",
+              },
+            }}
             multiple
             defaultExpandAll
             onSelect={this.onSelect}
@@ -78,3 +85,13 @@ class TreeView extends Component {
 }
 
 export default TreeView;
+
+//selected 파란색
+// .ant-tree.ant-tree-directory .ant-tree-treenode-selected:hover::before, .ant-tree.ant-tree-directory .ant-tree-treenode-selected::before {
+//   background: #1890ff;
+// }
+
+//hover 하얀색
+// .ant-tree.ant-tree-directory .ant-tree-treenode:hover::before {
+//   background: #f5f5f5;
+// }

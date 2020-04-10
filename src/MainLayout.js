@@ -30,14 +30,17 @@ class MainLayout extends React.Component {
 
   render() {
     return (
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout style={{ minHeight: "100vh", minWidth: "800vh" }}>
         <Sider
+          theme="dark"
+          width={370}
           collapsible
           collapsed={this.state.collapsed}
           onCollapse={this.onCollapse}
         >
           <div className="logo">K E P C O</div>
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+          <TreeView dtree={this.props.dtree} />
+          {/* <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">          
             <Menu.Item key="1">
               <PieChartOutlined />
               <span>Option 1</span>
@@ -74,7 +77,7 @@ class MainLayout extends React.Component {
             <Menu.Item key="9">
               <FileOutlined />
             </Menu.Item>
-          </Menu>
+          </Menu> */}
         </Sider>
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
@@ -95,8 +98,6 @@ class MainLayout extends React.Component {
               >
                 Click
               </button>
-
-              <TreeView dtree={this.props.dtree} />
             </div>
           </Content>
           <Layout style={{ background: "lightgray", minHeight: 5 }}>
