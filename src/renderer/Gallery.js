@@ -19,7 +19,15 @@ const images = [
 
 class MyGallery extends Component {
   render() {
-    return <ImageGallery items={images} showThumbnails={true} />;
+    return (
+      <ImageGallery
+        items={images}
+        showThumbnails={true}
+        showPlayButton={false}
+        showFullscreenButton={false}
+        showBullets={true}
+      />
+    );
   }
 }
 

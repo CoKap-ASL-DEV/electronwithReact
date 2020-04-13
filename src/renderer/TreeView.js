@@ -79,7 +79,9 @@ class TreeView extends Component {
             treeData={this.props.dtree}
           />
         ) : (
-          <h1>Test</h1>
+          <h3 style={{ color: "white", paddingLeft: "15px" }}>
+            Select the folder
+          </h3>
         )}
       </div>
     );

@@ -6,13 +6,20 @@ class ConvertButton extends Component {
   //   state = {
   //     size: "large",
   //   };
+  addFilesHandler = () => {
+    console.log("kkk");
+  };
 
   render() {
     // const { size } = this.state;
 
     return (
       <div>
-        <Button type="primary" icon={<PlusOutlined />}>
+        <Button
+          onClick={this.addFilesHandler}
+          type="primary"
+          icon={<PlusOutlined />}
+        >
           Add to Workspace
         </Button>
       </div>

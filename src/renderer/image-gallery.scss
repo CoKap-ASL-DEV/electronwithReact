@@ -161,7 +161,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
 
   .image-gallery-slide .image-gallery-image {
     max-height: calc(
-      85vh - 80px
+      82vh - 80px
     ); // 80 px for the thumbnail space   ///수정한곳
   }
 
@@ -175,7 +175,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
 
 .image-gallery-slide-wrapper {
   position: relative;
-  max-height: 60.6vh; ///수정한곳
+  max-height: 58.5vh; ///수정한곳
 
   &.left,
   &.right {
