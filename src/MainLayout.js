@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import "./MainLayout.css";
 import TreeView from "./renderer/TreeView";
+import AddtoWorkSpaceBtn from "./renderer/Button";
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
   DesktopOutlined,
@@ -30,17 +31,18 @@ class MainLayout extends React.Component {
 
   render() {
     return (
-      <Layout style={{ minHeight: "100vh", minWidth: "800vh" }}>
+      <Layout style={{ minHeight: "100vh", minWidth: "100vh" }}>
         <Sider
           theme="dark"
           width={370}
-          collapsible
+          // collapsible
           collapsed={this.state.collapsed}
           onCollapse={this.onCollapse}
+          style={{}}
         >
           <div className="logo">K E P C O</div>
           <TreeView dtree={this.props.dtree} />
-          {/* <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">          
+          {/* <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
             <Menu.Item key="1">
               <PieChartOutlined />
               <span>Option 1</span>
@@ -78,8 +80,22 @@ class MainLayout extends React.Component {
               <FileOutlined />
             </Menu.Item>
           </Menu> */}
+          <div
+            style={{
+              padding: "0px",
+              width: "100%",
+              height: "5%",
+              position: "absolute",
+              bottom: "0px",
+              //left: "50%",
+              //marginLeft: "-50px",
+            }}
+          >
+            <AddtoWorkSpaceBtn />
+            {/* <button style={{ width: "100px" }}>Convert</button> */}
+          </div>
         </Sider>
-        <Layout className="site-layout">
+        <Layout className="site-layout" style={{}}>
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: "0 16px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
@@ -100,7 +116,12 @@ class MainLayout extends React.Component {
               </button>
             </div>
           </Content>
-          <Layout style={{ background: "lightgray", minHeight: 5 }}>
+          <Layout
+            style={{
+              background: "lightgray",
+              minHeight: 5,
+            }}
+          >
             Big icon Images will be placed
           </Layout>
           <Footer style={{ textAlign: "center" }}>

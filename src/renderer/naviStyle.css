@@ -1,0 +1,20 @@
+.ant-tree.ant-tree-directory .ant-tree-treenode-selected:hover::before,
+.ant-tree.ant-tree-directory .ant-tree-treenode-selected::before {
+  background: #a3afb7;
+  opacity: 0.5;
+}
+
+.ant-btn-primary {
+  width: 100%;
+  color: #fff;
+  background-color: #1890ff;
+  border-color: #1890ff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+
+.ant-tree.ant-tree-directory .ant-tree-treenode:hover::before {
+  background: #a3afb7;
+  opacity: 0.8;
+}

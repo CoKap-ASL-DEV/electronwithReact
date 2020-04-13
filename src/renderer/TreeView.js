@@ -1,6 +1,7 @@
 import { Tree } from "antd";
 import React, { Component } from "react";
-import "antd/dist/antd.css";
+//import "antd/dist/antd.css";
+import "./naviStyle.css";
 import { CarryOutOutlined, FormOutlined } from "@ant-design/icons";
 //const { ipcRenderer } = window.require("electron");
 const { DirectoryTree } = Tree;
@@ -46,7 +47,8 @@ class TreeView extends Component {
     dTreeData: null,
   };
   onSelect = (keys, event) => {
-    console.log("Trigger Select", keys, event);
+    //console.log("Trigger Select", keys, event);
+    console.log(event);
   };
 
   onExpand = () => {

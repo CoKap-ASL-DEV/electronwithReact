@@ -56,7 +56,7 @@ function directoryTree(path, options, depth = null, keyCount = 0) {
   let key = keyName;
 
   //let item = { title, key, path };
-  let item = { title, key };
+  let item = { title, key, path };
   let stats;
 
   try {
