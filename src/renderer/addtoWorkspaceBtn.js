@@ -7,6 +7,7 @@ class ConvertButton extends Component {
   //     size: "large",
   //   };
   addFilesHandler = () => {
+    this.props.handler();
     console.log("kkk");
   };
 

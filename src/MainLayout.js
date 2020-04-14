@@ -7,6 +7,7 @@ import TreeView from "./renderer/TreeView";
 import AddtoWorkSpaceBtn from "./renderer/addtoWorkspaceBtn";
 import RemoveBtn from "./renderer/removeBtn";
 import ExecBtn from "./renderer/ExecutionBtn";
+
 import { Layout, Menu, Breadcrumb } from "antd";
 import {
   DesktopOutlined,
@@ -24,12 +25,23 @@ const { ipcRenderer } = window.require("electron");
 class MainLayout extends React.Component {
   state = {
     collapsed: false,
+    selectedPaths: null,
+    workspaceAddedPaths: null,
   };
 
   onCollapse = (collapsed) => {
     console.log(collapsed);
     this.setState({ collapsed });
   };
+
+  onPathSelected = (selectedPaths) => {
+    this.setState({ selectedPaths: selectedPaths });
+  };
+
+  onAddtoWorkspaceClicked = () => {
+    this.setState({ workspaceAddedPaths: this.state.selectedPaths });
+  };
+
   componentDidMount() {}
 
   render() {
@@ -53,7 +65,10 @@ class MainLayout extends React.Component {
               KEPCO Image Augmentation Program
             </h1>
           </div>
-          <TreeView dtree={this.props.dtree} />
+          <TreeView
+            dtree={this.props.dtree}
+            selectedHandler={this.onPathSelected}
+          />
 
           <div
             style={{
@@ -66,7 +81,7 @@ class MainLayout extends React.Component {
               //marginLeft: "-50px",
             }}
           >
-            <AddtoWorkSpaceBtn />
+            <AddtoWorkSpaceBtn handler={this.onAddtoWorkspaceClicked} />
             {/* <button style={{ width: "100px" }}>Convert</button> */}
           </div>
         </Sider>
@@ -84,7 +99,7 @@ class MainLayout extends React.Component {
               style={{ padding: 24, minHeight: 480 }}
             >
               <div>
-                <Gallery />
+                <Gallery imgPaths={this.state.workspaceAddedPaths} />
               </div>
               <div style={{ margin: "-60px 0px 0px 1400px" }}>
                 <RemoveBtn />
