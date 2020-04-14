@@ -11,17 +11,20 @@ const { ipcRenderer } = window.require("electron");
 class TreeView extends Component {
   state = {
     dTreeData: null,
+    imgPaths: null,
   };
+
   onSelect = (keys, event) => {
     console.log("aaa");
     console.log("Trigger Select", keys, event);
     const paths = genGalleryData(event.node);
     console.log(paths);
-    const imgPaths = paths.map((path) => {
+    const Paths = paths.map((path) => {
       return { original: path, thumbnail: path };
     });
-    console.log(imgPaths);
-    this.props.selectedHandler(imgPaths);
+    this.setState({ imgPaths: Paths });
+    console.log(this.state.imgPaths);
+    this.props.selectedHandler(this.state.imgPaths);
   };
 
   onExpand = () => {

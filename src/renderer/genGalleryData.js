@@ -1,4 +1,5 @@
 let dataPaths = [];
+
 const treeTraversal = (node) => {
   if (node.isLeaf) {
     dataPaths.push(node.path);
@@ -10,8 +11,13 @@ const treeTraversal = (node) => {
 };
 const genGalleryData = (node) => {
   treeTraversal(node);
-  return dataPaths;
+  console.log("ddddddddddddddddddd");
+  console.log(dataPaths);
+
+  return Array.from(new Set(dataPaths));
 };
+//dataPaths = null;
+
 export default genGalleryData;
 // const obj = {
 //   isLeaf: false,
