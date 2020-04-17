@@ -11,34 +11,35 @@ const { ipcRenderer } = window.require("electron");
 class TreeView extends Component {
   state = {
     dTreeData: null,
-    imgPaths: null,
+    checkedKeys: null,
   };
 
   onSelect = (keys, event) => {
-    console.log("aaa");
+    console.log("------------------");
     console.log("Trigger Select", keys, event);
+    console.log("------------------");
     const paths = genGalleryData(event.node);
-    console.log(paths);
-    const Paths = paths.map((path) => {
+    const imgPaths = paths.map((path) => {
       return { original: path, thumbnail: path };
     });
-    this.setState({ imgPaths: Paths });
-    console.log(this.state.imgPaths);
-    this.props.selectedHandler(this.state.imgPaths);
+    console.log(imgPaths);
+    this.props.selectedHandler(imgPaths);
   };
 
   onExpand = () => {
     console.log("Trigger Expand");
   };
-  componentDidMount() {
-    console.log("g34ggggg");
-  }
+
+  onCheck = (checkedKeys) => {
+    console.log("onCheck", checkedKeys);
+    this.setState({ checkedKeys: checkedKeys });
+  };
+
+  componentDidMount() {}
 
   render() {
-    console.log(this.props.dtree);
     return (
       <div>
-        {console.log(!!this.props.dtree)}
         {!!this.props.dtree ? (
           <DirectoryTree
             style={{
@@ -48,8 +49,11 @@ class TreeView extends Component {
                 background: "#111111",
               },
             }}
+            checkable
             multiple
             defaultExpandAll
+            onCheck={this.onCheck}
+            checkedKeys={this.state.checkedKeys}
             onSelect={this.onSelect}
             onExpand={this.onExpand}
             treeData={this.props.dtree}

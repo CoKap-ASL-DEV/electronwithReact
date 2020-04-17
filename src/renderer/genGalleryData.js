@@ -13,10 +13,10 @@ const genGalleryData = (node) => {
   treeTraversal(node);
   console.log("ddddddddddddddddddd");
   console.log(dataPaths);
+  const imgPaths = dataPaths;
 
-  return Array.from(new Set(dataPaths));
+  return Array.from(new Set(imgPaths));
 };
-//dataPaths = null;
 
 export default genGalleryData;
 // const obj = {
