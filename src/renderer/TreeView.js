@@ -18,12 +18,6 @@ class TreeView extends Component {
     console.log("------------------");
     console.log("Trigger Select", keys, event);
     console.log("------------------");
-    const paths = genGalleryData(event.node);
-    const imgPaths = paths.map((path) => {
-      return { original: path, thumbnail: path };
-    });
-    console.log(imgPaths);
-    this.props.selectedHandler(imgPaths);
   };
 
   onExpand = () => {
@@ -33,6 +27,13 @@ class TreeView extends Component {
   onCheck = (checkedKeys) => {
     console.log("onCheck", checkedKeys);
     this.setState({ checkedKeys: checkedKeys });
+    const paths = genGalleryData(this.props.dtree[0], checkedKeys);
+    console.log(paths);
+    const imgPaths = paths.map((path) => {
+      return { original: path, thumbnail: path };
+    });
+    console.log(imgPaths);
+    this.props.selectedHandler(imgPaths);
   };
 
   componentDidMount() {}

@@ -1,4 +1,3 @@
-"use strict";
 const FS = require("fs");
 const PATH = require("path");
 const isLeaf = {
@@ -86,6 +85,7 @@ function directoryTree(path, options, depth = null, keyCount = 0) {
     item.extension = ext;
     item.isLeaf = isLeaf.FILE;
     item.uid = stats.uid; // File size in bytes
+    item.key = item.key + "f";
 
     if (options && options.attributes) {
       options.attributes.forEach((attribute) => {

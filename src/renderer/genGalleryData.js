@@ -1,17 +1,29 @@
 let dataPaths = [];
 
-const treeTraversal = (node) => {
+// const treeTraversal = (node) => {
+//   if (node.isLeaf) {
+//     dataPaths.push(node.path);
+//   } else {
+//     node.children.map((cNode) => {
+//       treeTraversal(cNode);
+//     });
+//   }
+// };
+const treeTraversal = (node, keys) => {
   if (node.isLeaf) {
-    dataPaths.push(node.path);
+    const found = keys.find((element) => element === node.key);
+    if (!(typeof found === "undefined")) {
+      dataPaths.push(node.path);
+    }
   } else {
     node.children.map((cNode) => {
-      treeTraversal(cNode);
+      treeTraversal(cNode, keys);
     });
   }
 };
-const genGalleryData = (node) => {
-  treeTraversal(node);
-  console.log("ddddddddddddddddddd");
+const genGalleryData = (node, keys) => {
+  treeTraversal(node, keys);
+
   console.log(dataPaths);
   const imgPaths = dataPaths;
 

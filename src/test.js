@@ -16,12 +16,12 @@ const treeData = [
         children: [
           {
             title: "0-0-0-0",
-            key: "0-0-0-0",
+            key: "0-0-0-0f",
             isLeaf: true,
           },
           {
             title: "0-0-0-1",
-            key: "0-0-0-1",
+            key: "0-0-0-1f",
             isLeaf: true,
           },
         ],
@@ -29,23 +29,23 @@ const treeData = [
       {
         title: "0-0-1",
         key: "0-0-1",
-
+        isLeaf: false,
         children: [
           {
             title: "0-0-1-0",
-            key: "0-0-1-0",
+            key: "0-0-1-0f",
             isLeaf: true,
           },
           {
             title: "0-0-1-1",
-            key: "0-0-1-1",
+            key: "0-0-1-1f",
             isLeaf: true,
           },
         ],
       },
       {
         title: "0-0-2",
-        key: "0-0-2",
+        key: "0-0-2f",
         isLeaf: true,
       },
     ],
@@ -53,32 +53,36 @@ const treeData = [
   {
     title: "0-1",
     key: "0-1",
+    isLeaf: false,
     children: [
       {
         title: "0-1-0-0",
-        key: "0-1-0-0",
+        key: "0-1-0-0f",
         isLeaf: true,
       },
       {
         title: "0-1-0-1",
-        key: "0-1-0-1",
+        key: "0-1-0-1f",
         isLeaf: true,
       },
     ],
   },
   {
     title: "0-2",
-    key: "0-2",
-    isLeaf: "http:\\",
+    key: "0-2f",
+    isLeaf: true,
   },
 ];
 
-const dest = ["0-1-0-0", "0-2"];
+const dest = ["0-0-0-1f", "0-2f"];
 
 class Test extends Component {
   render() {
     const result = dest.map((i) => {
-      const filtering = treeData.filter((item) => {
+      const filtering = treeData.filter(function traverse(item) {
+        if (!item.isLeaf) {
+          traverse(item.children);
+        }
         if (item.key === i) {
           return true;
         } else {

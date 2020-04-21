@@ -39,6 +39,7 @@ class MainLayout extends React.Component {
   };
 
   onAddtoWorkspaceClicked = () => {
+    console.log("clicked");
     this.setState({ workspaceAddedPaths: this.state.selectedPaths });
   };
 
